@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: polling-db
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: polling_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d polling_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - polling-net
+
+  app:
+    build: .
+    container_name: polling-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: polling_db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      SECRET_KEY: rahasia123
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - polling-net
+
+volumes:
+  postgres-data:
+
+networks:
+  polling-net:
+    driver: bridge

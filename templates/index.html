@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Polling App</title><style>
+body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; }
+h1 { color: #2c3e50; }
+ul { list-style: none; padding: 0; }
+li { background: #f4f4f4; margin: 10px 0; padding: 15px; border-radius: 5px; }
+a { color: #3498db; text-decoration: none; }
+</style></head>
+<body><h1>📊 Daftar Polling</h1>
+<ul>{% for q in questions %}<li><strong>{{ q.question_text }}</strong><br>
+<a href="{{ url_for('vote', question_id=q.id) }}">Ikuti voting</a> |
+<a href="{{ url_for('result', question_id=q.id) }}">Lihat hasil</a></li>{% endfor %}</ul>
+</body></html>
