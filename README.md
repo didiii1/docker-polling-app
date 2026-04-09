@@ -29,7 +29,7 @@ Penyimpanan data menggunakan database (persistent)
 
 📥 Download laporan:
 
-[Laporan Praktikum (PDF)](laporan.pdf)
+[Laporan Praktikum](laporan%20destsa.pdf)
 🧠 Kesimpulan
 
 Project ini membantu memahami penggunaan Docker untuk menjalankan aplikasi berbasis Flask dengan database PostgreSQL. Selain itu, dipelajari juga konsep persistensi data menggunakan Docker volume.
